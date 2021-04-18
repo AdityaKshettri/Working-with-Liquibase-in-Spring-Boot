@@ -1,0 +1,1 @@
+INSERT INTO ${schemaName}.users (name, email) VALUES ('Aditya', 'adikshettri1623@gmail.com');

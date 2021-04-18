@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Aditya" id="create_schema" runAlways="false" runOnChange="true">
+        <sqlFile relativeToChangelogFile="true" path="../sql/init_schema.sql" />
+    </changeSet>
+
+    <changeSet author="Aditya" id="create_entity_users">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="usersPK" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet  author="Aditya" id="data-1.0.0" runAlways="false" runOnChange="true">
+        <sqlFile relativeToChangelogFile="true" path="../sql/data/1.0.0/init_users.sql" />
+        <rollback>
+            <sqlFile relativeToChangelogFile="true" path="../sqlRollbacks/data/1.0.0/R_init_users.sql" />
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
